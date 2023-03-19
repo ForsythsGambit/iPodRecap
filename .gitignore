@@ -1,3 +1,14 @@
+#project files
+test.py
+doc.txt
+notes.txt
+testxml.xml
+bindictlib.dat
+binlib.dat
+binrawlib.dat
+dicttest.py
+testxml.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,7 +139,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-test.py
-doc.txt
-notes.txt
-testxml.xml

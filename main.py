@@ -62,7 +62,6 @@ for id, song in binlib.songs.items():
 
 
 """remove unplayed albums"""
-print(ArtistPC)
 PrunedArtistPC={}
 for Artist in ArtistPC.keys():
     for album in ArtistPC[Artist]["Albums"].keys():
@@ -77,7 +76,8 @@ for Artist in ArtistPC.keys():
                 PrunedArtistPC[Artist]["Albums"][album]["PlayCount"]=ArtistPC[Artist]["Albums"][album]["PlayCount"]
                 PrunedArtistPC[Artist]["Albums"][album]["PlayTime"]=ArtistPC[Artist]["Albums"][album]["PlayTime"]
         else:
-            print("pruned unplayed album: "+ str(album))
+            #print("pruned unplayed album: "+ str(album))
 ArtistPC=PrunedArtistPC
 pickle.dump(ArtistPC, open("bindictlib.dat", "wb"))
 bindictlib = pickle.load(open("bindictlib.dat", "rb"))
+print(ArtistPC)

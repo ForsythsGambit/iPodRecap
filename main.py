@@ -80,4 +80,4 @@ for Artist in ArtistPC.keys():
             print("pruned unplayed album: "+ str(album))
 ArtistPC=PrunedArtistPC
 pickle.dump(ArtistPC, open("bindictlib.dat", "wb"))
-binlib = pickle.load(open("bindictlib.dat", "rb"))
+bindictlib = pickle.load(open("bindictlib.dat", "rb"))

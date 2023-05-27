@@ -7,8 +7,10 @@ import datetime
 libsource=Library('testxml.xml')
 FileModUTC=datetime.datetime.utcfromtimestamp(os.path.getmtime("testxml.xml"))
 binDateName=f"{FileModUTC.day}-{FileModUTC.month}-{FileModUTC.year}"
-pickle.dump(libsource, open(f"{binDateName}.dat", "wb"))
-binlib = pickle.load(open(f"{binDateName}.dat", "rb"))
+with open(f"{binDateName}.dat", "wb") as binfile:
+    pickle.dump(libsource, binfile)
+with open(f"{binDateName}.dat", "rb") as binfile:
+    binlib = pickle.load(open(f"{binDateName}.dat", "rb"))
 ArtistPC={} #{Artist : {Albums: {Album name : {PlayCount : int, playtime: int}}} }
 
 """Organize all tracks by Artist, then by Album in a nested disctionary, sotring play counts per album and play time per album"""
@@ -88,8 +90,10 @@ for Artist in ArtistPC.keys():
             pass
             #print("pruned unplayed album: "+ str(album))
 ArtistPC=PrunedArtistPC
-pickle.dump(ArtistPC, open(f"{binDateName}.dat", "wb"))
-bindictlib = pickle.load(open(f"{binDateName}.dat", "rb"))
+with open(f"{binDateName}.dat", "wb") as binfile:
+    pickle.dump(ArtistPC,binfile)
+with open(f"{binDateName}.dat", "rb") as binfile:
+    bindictlib = pickle.load(binfile)
 #print(ArtistPC)
 
 

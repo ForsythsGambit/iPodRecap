@@ -1,10 +1,14 @@
 import os
 import pickle
 from libpytunes import Library
+import datetime
+
 
 libsource=Library('testxml.xml')
-pickle.dump(libsource, open("binrawlib.dat", "wb"))
-binlib = pickle.load(open("binrawlib.dat", "rb"))
+FileModUTC=datetime.datetime.utcfromtimestamp(os.path.getmtime("testxml.xml"))
+binDateName=f"{FileModUTC.day}-{FileModUTC.month}-{FileModUTC.year}"
+pickle.dump(libsource, open(f"{binDateName}.dat", "wb"))
+binlib = pickle.load(open(f"{binDateName}.dat", "rb"))
 ArtistPC={} #{Artist : {Albums: {Album name : {PlayCount : int, playtime: int}}} }
 
 """Organize all tracks by Artist, then by Album in a nested disctionary, sotring play counts per album and play time per album"""
@@ -84,8 +88,8 @@ for Artist in ArtistPC.keys():
             pass
             #print("pruned unplayed album: "+ str(album))
 ArtistPC=PrunedArtistPC
-pickle.dump(ArtistPC, open("bindictlib.dat", "wb"))
-bindictlib = pickle.load(open("bindictlib.dat", "rb"))
+pickle.dump(ArtistPC, open(f"{binDateName}.dat", "wb"))
+bindictlib = pickle.load(open(f"{binDateName}.dat", "rb"))
 #print(ArtistPC)
 
 
@@ -119,7 +123,7 @@ for Artist in ArtistPC.keys():
         if len(AlbumPT)==0:
             #print("list empty, adding album "+album)
             AlbumPT.append((str(album),str(Artist),AlbumTime))
-            
+
     #print(" ")
     for x in range(0, len(ArtistPT)):
         if tArtistPC>ArtistPT[x][1]:
@@ -142,4 +146,3 @@ print("Your second was: " + str(ArtistPT[1][0]) + " with "+str(ArtistPT[1][1]) +
 print(' ')
 print("Your top album in total playtime was: " + str(AlbumPT[0][0]) + " with "+str(AlbumPT[0][2]) +" hours!")
 print("Your second was: " + str(AlbumPT[1][0]) + " with "+str(AlbumPT[1][2]) +" hours, and "+str(AlbumPT[2][0]) + " with "+str(AlbumPT[2][2]) +" hours in third. \nFollowed by "+str(AlbumPT[3][0]) + " with "+str(AlbumPT[3][2]) +" hours, and "+str(AlbumPT[4][0]) + " with "+str(AlbumPT[4][2]) +" hours in fifth.")
-

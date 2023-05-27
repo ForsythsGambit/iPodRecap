@@ -8,7 +8,7 @@ binlib.dat
 binrawlib.dat
 dicttest.py
 testxml.py
-
+*.dat
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -199,6 +199,7 @@ def ParseDiffPlaytime(Library1, Library2):
             AlbumPT.append((str(album),str(Artist),AlbumTime))
             return True
         return False
+    
     for Artist in Library2.keys():
         ArtistTime=0
         #print(f"Artist: {Artist}")

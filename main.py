@@ -3,15 +3,16 @@ import pickle
 from libpytunes import Library
 import datetime
 
-def LibraryInputs(Lib1 , Lib2=None):
+def LibraryInputs(Lib1 , Lib2=None, Verbose=True):
     if Lib2==None:
         FileModUTC=datetime.datetime.utcfromtimestamp(os.path.getmtime(Lib1))
         binDateName=f"{FileModUTC.day}-{FileModUTC.month}-{FileModUTC.year}"
         Lib1Dict, TotalTime = ConvertXML(Lib1)
         PickleDict(Lib1Dict, Lib1)
         ArtistTime, AlbumTime=ParsePlaytime(Lib1Dict)
-        DisplayResults(TotalTime, ArtistTime, AlbumTime)
-        return None
+        if Verbose==True:
+            DisplayResults(TotalTime, ArtistTime, AlbumTime)
+        return TotalTime,ArtistTime,AlbumTime
     FileModUTC1=datetime.datetime.utcfromtimestamp(os.path.getmtime(Lib1))
     FileModUTC2=datetime.datetime.utcfromtimestamp(os.path.getmtime(Lib2))
     binDateName1=f"{FileModUTC1.day}-{FileModUTC1.month}-{FileModUTC1.year}"
@@ -26,8 +27,9 @@ def LibraryInputs(Lib1 , Lib2=None):
     PickleDict(Lib2Dict, Lib2)
     #return ParseDiffPlaytime(Lib1Dict,Lib2Dict)
     DiffArtistPlaytime, DiffAlbumPlaytime = ParseDiffPlaytime(Lib1Dict,Lib2Dict)
-    DisplayResults((Lib2TT-Lib1TT),DiffArtistPlaytime,DiffAlbumPlaytime)
-    return None
+    if Verbose==True:
+        DisplayResults((Lib2TT-Lib1TT),DiffArtistPlaytime,DiffAlbumPlaytime)
+    return (Lib2TT-Lib1TT),DiffArtistPlaytime,DiffAlbumPlaytime
     
 def ConvertXML(libraryFile : "name of iTunes XML library file"):
     libsource=Library(libraryFile)

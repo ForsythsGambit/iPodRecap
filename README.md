@@ -27,3 +27,6 @@ Regardless of the number of library filenames passed `LibraryInputs()` will retu
 For example:
 
 `TotalPlaytime, ArtistPlaytimeList, AlbumPlaytimeList = LibraryInputs("oldxml.xml", "newxml.xml")`
+
+# Acknowledgments
+A big thank you to Liam Kaufman (@liamk) who wrote the excellent [libpytunes](https://github.com/liamks/libpytunes) which made parsing the iTunes library file substantially easier.
